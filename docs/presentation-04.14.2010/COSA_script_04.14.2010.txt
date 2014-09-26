@@ -1,0 +1,76 @@
+Slide 0:
+Slide 1:
+Template based tracking usually uses a combination of shape and appearance to model the object. 
+A target can be represented, for example, by a rectangular shape and an associated appearance 
+model. Tracking is performed by computing the optimal parametric transformation of the shape 
+model according to certain criteria in consecutive frames. 
+
+Contour tracking, is performed by estimating the outline of the target, given an initial contour 
+from the previous frame. Hence, contour tracking can also be seen as a foreground/background 
+labeling algorithm in each frame using the estimated contour from previous images as priors. Both 
+template and contour based algorithms can be viewed as tracking at the level of super-pixel.
+
+Optical flow estimation operates at the pixel level. It tracks the movement of each pixel in an 
+image sequence. Optical flow is defined as the motion field of corresponding pixels in two 
+consecutive frames. Today, the most accurate class of optical flow algorithms is based on the 
+calculus of variations. It models the optical flow field as an optimal solution to an energy 
+functional composed of data constancy terms and smoothness terms.
+
+My dissertation has made contributions to all of the three categories. In the first part, a robust 
+Studentized Dynamical System framework is proposed for robust online template tracking. This framework, 
+based on a full Bayesian Student's t-distribution PCA, fine-tunes its parameters online to the 
+appearance evolutions of the target as the tracking task progresses. As a second contribution, 
+a new synergistic contour tracking algorithm is developed for the robust tracking of a moving target 
+contour undergoing non-rigid motion. The method is based on unifying two powerful segmentation tools 
+under a unified Bayesian framework. Finally, a new algorithm is developed for optical flow estimation 
+by augmenting an L1 total variation framework with a $p$-harmonic energy functional.
+
+Slide 2:
+The goal of cluster analysis is to partition a data set of N objects into subgroups such that those
+in each particular group are more similar to each other than to those of other groups. De...ning
+an “encoder” function c(i) that maps each object i to a particular group Gl (1 l L).
+
+one can formalize this goal as finding the “optimal”encoder c (i) that minimizes a criterion Q(c).
+One such criterion is used in classic clustering analysis. where Dij is a defined distance or 
+dissimilarity measure between every pair of objects (i; j), and Nl is the number of objects assigned 
+to the lth group. and where Wl are cluster weights. Thus criterion (3) is a weighted average over the groups, 
+of the within group mean distance between pairs of objects assigned to the same group. Each object i is 
+characterized by a set of n measured attributes (variables). One can define a distance dijk between
+objects (i,j) separately on each attribute k, and then Dij is taken to be a weighted a average of the
+respective attribute distances. The denominator sk provides a scale from measuring closeness on 
+each attribute.
+
+Defining clusters in terms of simultaneous closeness on all attributes may sometimes be desirable,
+but often it is not. In data mining applications, the values of many attributes are often measured
+and it is unlikely that natural groupings will exist based on a large number of them. Usually,
+clustering, if it exists, occurs only within a relatively small unknown subset of the attributes. To
+the extent all of the attributes have equal inuence, this type of clustering will be obscured and
+difficult to uncover. 
+
+The relative influence of each attribute xk is regulated by its corresponding weight wk. Formally, 
+feature selection seeks to find an optimal weighting as part of the clustering problem by jointly 
+minimizing the clustering criterion according to (3) and (5) with respect to the encoder c and weights w.
+The solution w* has high weight values for those attributes that most exhibit clustering on the objects, 
+and small values for those that do not participate in the clustering. The solution encoder c(i) identifies 
+the corresponding clusters.
+
+
+Feature selection is often helpful, but it only seeks groups that all cluster on the same subset
+of attributes. I.e., Those are attributes with large solution weight values (13). However, individual
+clusters may represent groupings on different (possibly overlapping) attribute subsets, and it is
+of interest to discover such structure. With only feature selection, clustering on different subsets of
+attributes will still be obscured and di¢ cult to uncover.
+
+Slide 3:
+As it turns out, we can go one step further, by generalizing the feature selection criterion to find
+clusters on separate attribute subsets by defining a separate attribute weighting wl for each individual
+group Gl, and jointly minimizing with respect to the encoder and all the separate weight sets associated 
+with the respective groups. 
+
+The solution will put maximal weights on attributes with smallest dispersion within each group Gl, and
+zero weights on all other attributes. Note that minimizing this criterion directly will produce solutions
+that tend to cluster only on a single attribute. Therefore, the authors augumented it withan additional
+regularization, with the quantity \lambda controls the strength between the two terms. Increasing its value
+will encourage clusters on more attributes.
+
+

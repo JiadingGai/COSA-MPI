@@ -1,0 +1,4 @@
+\frametitle {Serial COSA}
+\begin{lstlisting}
+void main(int argc, char* argv[]){}
+\end{lstlisting}

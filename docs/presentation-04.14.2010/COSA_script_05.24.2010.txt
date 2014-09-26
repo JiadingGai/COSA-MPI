@@ -1,0 +1,47 @@
+Slide 1:
+The goal of cluster analysis is to partition a data set of N objects into subgroups such that those
+in each particular group are more similar to each other than to those of other groups. Cluster analysis
+computes an “encoder” function c(i) that maps each object i to a particular group l (1<l<L).
+
+One can formalize this goal as finding the “optimal”encoder c(i) that minimizes a criterion.
+Defining clusters in terms of simultaneous closeness on all attributes may sometimes be desirable,
+but often it is not. In data mining applications, the values of many attributes are often measured
+and it is unlikely that natural groupings will exist based on a large number of them. Usually,
+clustering, if it exists, occurs only within a relatively small unknown subset of the attributes.
+So, COSA generalizes the classic clustering criterion to find clusters on separate attribute subsets 
+by defining a separate attribute weighting wl for each individual group Gl, and jointly minimizing 
+with respect to the encoder and all the separate weight sets associated with the respective groups. 
+
+where Dij is a defined distance between every pair of objects (i,j), and Nl is the number of objects assigned 
+to the lth group. and where Wl are cluster weights. Thus this criterion is a weighted average over the groups, 
+of the within group mean distance between pairs of objects assigned to the same group. Each object i is 
+characterized by a set of n measured attributes. One can define a distance dijk between
+objects (i,j) separately on each attribute k, and then Dij is taken to be a weighted average of the
+respective attribute distances. The denominator sk provides a scale from measuring closeness on 
+each attribute.
+
+Slide 2:
+The search strategy uses a surrogate criterion for which the weights provide a good starting point.
+There are two loops to accommodate this homotopy optimization scheme, that is, to move from inverse 
+exponential to ordinary Euclidean distance. The inner loop involves 4 steps. First, a distance between
+object (i,j) is computed based on a weighted inverse exponential mean with scale parameter eta. As 
+eta becomes large, it approaches the ordinary distance. As the limit is approached, this distance
+definition can be used to produce equivalent surrogate criteria for ... and step 6 (update of eta) is 
+done in the outer loop. Again, the whole idea to start with the negative exponential is to avoid 
+getting stuck in local maxima (with Euclidean distance that is guaranteed to happen). 
+
+Slide 3:
+The parallel COSA algorithm is better explained using this figure. Most of the computations
+in the last slide consist of two or three nested for loops going through each object pairs
+and attributes. In this 3D coordinate, each (x,y) tuple represents an object pair. The z axis
+is the attribute. We divide up the computations by a 3D grid communicator to which Cartesian
+topology information has been attached. Furthermore, the 3D grid communicator is partitioned 
+into 6 sub-communicator to facilitate MPI communication calls. For example, a slice communicator
+along z axis is created by calling MPI_Cart_sub with z fixed and x,y allowing to vary. Other
+communicators include row-communicator ...
+
+The total number of processes p is not evenly distributed among the three axis. p is assumed
+to be a product of three factors, px, py, and pz. The x,y axis gets equal amount of processes
+because they both represent objects, so px = py. The z axis gets a different amount pz.
+Consequently, each process in the 3d grid gets N_bar objects and is only in charge of updating
+n_bar amount of attributes.

@@ -1,0 +1,5 @@
+#!/bin/csh
+#$ -M jgai@nd.edu
+#$ -pe ompi-4 32
+module load ompi/1.3.2-gnu
+mpirun -np 32 parallel_cosa2 noisespam.dat 1000 10055  2 2 8

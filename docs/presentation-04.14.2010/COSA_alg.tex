@@ -1,0 +1,152 @@
+\documentclass[a4paper]{report}
+
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{algorithm2e}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+\usepackage{anysize}
+\marginsize{3cm}{2cm}{1cm}{1cm}
+% This concludes the preamble
+\definecolor{MyDarkGreen}{rgb}{0,0.65,0.08}
+
+\begin{document}
+
+\begin{algorithm}[H]
+\SetLine
+\KwIn{$\textbf{W}=\{\frac{1}{n}\}$; $\eta=\lambda$;$L$ initial cluster centroids.}
+\KwOut{A distance matrix $D_{ij}[\textbf{W}]$ between all object pairs.}
+
+\While{$\textbf{W}$ not stable}{
+\ForEach{Attributes k = 1 to n}{
+  \ForEach{Objects i = 1 to N}{
+    \ForEach{Objects j = 1 to N}{
+      s[k] += $\frac{1}{N^2} |x_{ik}-x_{jk}|$;
+    }
+  }
+  \ForEach{Objects i = 1 to N}{
+    \ForEach{Objects j = 1 to N}{
+      d[i][j][k] = $\frac{|x_{ik}-x_{jk}|}{s[k]}$; \\
+      D[i][j] += w[k][i] * exp($-\frac{d[i][j][k]}{\eta}$);
+    }
+  }
+}
+\ForEach{Objects i = 1 to N}{
+  \ForEach{Objects j = 1 to N}{
+    D[i][j] = -$\eta$ * log(D[i][j]);
+  }
+}
+\ForEach{Objects i = 1 to N}{
+  \ForEach{Objects j = 1 to N}{
+    D[i][j] = max(D[i][j],D[j][i]);
+  }
+}
+\ForEach{Objects i = 1 to N}{
+  \ForEach{Objects j = 1 to N}{
+    Find K=$\sqrt{N}$ nearest neighbors of Object i; 
+  }
+}
+\ForEach{Attributes k = 1 to n}{
+  \ForEach{Objects i = 1 to N}{
+    \ForEach{Objects j = 1 to K}{
+      S[k][i] += $\frac{1}{K}$ * d[i][j][k];
+    }
+    w[k][i] = exp(-$\frac{S[k][i]}{\lambda}$);\\
+  }
+}
+    \ForEach{Objects i = 1 to N}{
+      \ForEach{Attributes k = 1 to n}{
+      Sum[i] += w[k][i];
+    }
+\ForEach{Attributes k = 1 to n}{
+     w[k][i] /= Sum[i];
+    }
+}
+}
+\caption{Sequential COSA2 algorithm}
+\label{alg:mine}
+\end{algorithm}
+
+
+
+
+
+\begin{algorithm}[H]
+\SetLine
+\KwIn{$\textbf{W}=\{\frac{1}{n}\}$; $\eta=\lambda$; $\overline{N}=\frac{N}{p_x}$, $\overline{n}=\frac{n}{p_z}$; $p=p_x \cdot p_y \cdot p_z$.}
+\KwOut{A distance matrix $D_{ij}[\textbf{W}]$ between all object pairs.}
+
+\While{$\textbf{W}$ not stable}{
+\While{$nIter > 0$}{
+\ForEach{Attributes k = 1 to $\overline{n}$}{
+  \ForEach{Objects i = 1 to $\overline{N}$}{
+    \ForEach{Objects j = 1 to $\overline{N}$}{
+      local\_s[k] += $\frac{1}{N^2} |x_{ik}-x_{jk}|$;\textcolor{MyDarkGreen}{// $s_k=\frac{1}{N^2}\sum^N_{i=1}\sum^N_{j=1}|x_{ik}-x_{jk}|$}
+    }
+  }
+}
+MPI\_Allreduce(local\_s, s, $\overline{n}$, MPI\_FLOAT, MPI\_SUM, grid.slice\_comm\_along\_z);\\
+\ForEach{Attributes k = 1 to $\overline{n}$}{
+  \ForEach{Objects i = 1 to $\overline{N}$}{
+    \ForEach{Objects j = 1 to $\overline{N}$}{
+      d[i][j][k] = $\frac{|x_{ik}-x_{jk}|}{s[k]}$;\textcolor{MyDarkGreen}{// $d_{ijk}=\frac{|x_{ik}-x_{jk}|}{s_k}$}\\
+      \textcolor{MyDarkGreen}{// $D^{(\eta)}_{ij}[\textbf{w}]=-\eta \cdot \log \sum^{n}_{k=1}w_{ki} \cdot e^{-\frac{d_{ijk}}{\eta}}$}\\
+      local\_D[i][j] += local\_w[k][i] * exp($-\frac{d[i][j][k]}{\eta}$);
+    }
+  }
+}
+MPI\_Allreduce(local\_D, D, $\overline{N} \cdot \overline{N}$, MPI\_FLOAT, MPI\_SUM, grid.depth\_comm);\\
+\ForEach{Objects i = 1 to $\overline{N}$}{
+  \ForEach{Objects j = 1 to $\overline{N}$}{
+    D[i][j] = -$\eta$ * log(D[i][j]);
+  }
+}
+\textcolor{MyDarkGreen}{//$D^{1}_{ij}[\textbf{W}]=\max(D^{(\eta)}_{ij}[\textbf{w}_{c(i|\textbf{W})}],D^{(\eta)}_{ij}[\textbf{w}_{c(j|\textbf{W})}])$ (30) }\\
+\textbf{Combining observation pair weights (max): D[i][j] = max(D[i][j],D[j][i]);} \\ 
+\ForEach{Objects i = 1 to $\overline{N}$}{
+  \ForEach{Objects j = 1 to $\overline{N}$}{
+    Find KNN of Object i $\rightarrow$ local\_KNN[i][1...K]; \textcolor{MyDarkGreen}{// KNN$(i)=\{j|D_{ij} \leq d_{i(K)}\}$}\\
+  }
+}
+MPI\_Allgather(local\_KNN, $\overline{N} \cdot K$, MPI\_FLOAT,\\
+~~~~~~~~~~~~~~~global\_KNN, $p_x \cdot \overline{N} \cdot K$, MPI\_FLOAT, grid.row\_comm);\\
+\ForEach{i = 1 to $\overline{N}$}{
+    Find KNN[i][1...K] from global\_KNN[i][1...$p_x \cdot K$];
+}
+
+
+\ForEach{Attributes k = 1 to $\overline{n}$}{
+  \ForEach{Objects i = 1 to $\overline{N}$}{
+    \ForEach{Objects j = 1 to K}{
+      local\_S[k][i] += $\frac{1}{K}$ * d[i][j][k];\textcolor{MyDarkGreen}{// $S_{ki}=\frac{1}{K}\sum_{j \in KNN(i)}d_{ijk}$}
+    }
+  }
+}
+MPI\_Allreduce(local\_S, S, $\overline{n} \cdot \overline{N}$, MPI\_FLOAT, MPI\_SUM, grid.row\_comm);\\
+\ForEach{Attributes k = 1 to $\overline{n}$}{
+  \ForEach{Objects i = 1 to $\overline{N}$}{
+    local\_w[k][i] = exp(-$\frac{S[k][i]}{\lambda}$);\textcolor{MyDarkGreen}{// $w_{ki}=\frac{e^{-\frac{S_{ki}}{\lambda}}}{\sum^n_{k'=1}e^{-\frac{S_{ki}}{\lambda}}}$}
+  }
+}
+\textbf{Normalize local\_w $\rightarrow$ w.}
+%    \ForEach{Objects i = 1 to $\frac{N}{p}$}{
+%       \ForEach{Attributes k = 1 to n}{
+%       Sum[i] += w[k][i];
+%     }
+% \ForEach{Attributes k = 1 to n}{
+%      w[k][i] /= Sum[i];
+%     }
+% }
+}
+$\eta = \eta + \alpha \cdot \lambda$
+}
+\caption{Parallel COSA2 algorithm}
+\label{alg:mine}
+\end{algorithm}
+
+\end{document}

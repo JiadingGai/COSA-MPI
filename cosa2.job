@@ -1,0 +1,4 @@
+#!/bin/csh
+#$ -M jgai@nd.edu
+#$ -pe ompi-4 1
+time ./cosa2
