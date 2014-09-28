@@ -1,6 +1,5 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.5.6)  23 MAY 2010 23:12
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.7.15)  28 SEP 2014 16:04
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **COSA_alg.tex
 (./COSA_alg.tex
@@ -34,7 +33,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 Package color Info: Driver file: pdftex.def on input line 130.
 
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \Gread@gobject=\count88
 ))
 (/usr/share/texmf/tex/latex/xcolor/xcolor.sty
@@ -83,9 +82,8 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
-
-(/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
-Package: algorithm2e 2005/10/04 v3.9 algorithms environments
+ (./algorithm2e.sty
+Package: algorithm2e 2008/00/00 v3.10 algorithms environments
 \c@AlgoLine=\count97
 
 (/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
@@ -94,45 +92,59 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 (/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
 Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
 )
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/relsize.sty
+Package: relsize 2003/07/04 ver 3.1
+)
 ********************************************************
-Package `algorithm2e' Release 3.9 -- october 04 2005 --
+Package `algorithm2e' Release 4.01 -- december 14 2009 --
 - algorithm2e-announce@lirmm.fr mailing list for announcement about releases
 - algorithm2e-discussion@lirmm.fr mailing list for discussion about package
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (fiorio@lirmm.fr)
 ********************************************************
 \skiptotal=\skip43
-\skiprule=\skip44
-\skiphlne=\skip45
-\skiptext=\skip46
-\skiplength=\skip47
-\algomargin=\skip48
-\skipalgocfslide=\skip49
+\skiplinenumber=\skip44
+\skiprule=\skip45
+\skiphlne=\skip46
+\skiptext=\skip47
+\skiplength=\skip48
+\algomargin=\skip49
+\skipalgocfslide=\skip50
 \algowidth=\dimen107
 \inoutsize=\dimen108
 \inoutline=\dimen109
+\interspacetitleruled=\dimen110
+\interspacealgoruled=\dimen111
+\interspacetitleboxruled=\dimen112
 \algocf@inoutbox=\box28
 \algocf@inputbox=\box29
-\AlCapSkip=\skip50
-\AlCapHSkip=\skip51
-\algocf@capbox=\box30
+\AlCapSkip=\skip51
+\AlCapHSkip=\skip52
+\algocf@nlbox=\box30
+\algocf@hangingbox=\box31
+\algocf@capbox=\box32
+\algoheightruledefault=\skip53
+\algoheightrule=\skip54
+\algotitleheightruledefault=\skip55
+\algotitleheightrule=\skip56
 \c@algocfline=\count98
-\c@algocf=\count99
-\algocf@algoframe=\box31
-\algocf@algobox=\box32
+\c@algocfproc=\count99
+\c@algocf=\count100
+\algocf@algoframe=\box33
+\algocf@algobox=\box34
 ) (/usr/share/texmf-texlive/tex/latex/caption/caption.sty
 Package: caption 2009/10/09 v3.1k Customizing captions (AR)
 
 (/usr/share/texmf-texlive/tex/latex/caption/caption3.sty
 Package: caption3 2009/10/09 v3.1k caption3 kernel (AR)
-\captionmargin=\dimen110
-\captionmargin@=\dimen111
-\captionwidth=\dimen112
-\caption@indent=\dimen113
-\caption@parindent=\dimen114
-\caption@hangindent=\dimen115
+\captionmargin=\dimen113
+\captionmargin@=\dimen114
+\captionwidth=\dimen115
+\caption@indent=\dimen116
+\caption@parindent=\dimen117
+\caption@hangindent=\dimen118
 )
-\c@ContinuedFloat=\count100
+\c@ContinuedFloat=\count101
 Package caption Info: listings package is loaded.
 )
 (/usr/share/texmf-texlive/tex/latex/anysize/anysize.sty
@@ -141,15 +153,11 @@ Package: anysize 1994/08/13 setting margin sizes
 document style option `anysize' loaded
 Michael Salzenberg, Thomas Esser, Dirk Hillbrecht
 Version 1.0, Aug 13, 1994
-\@Leftmargin=\dimen116
-\@Rightmargin=\dimen117
-\@Topmargin=\dimen118
-\@Bottommargin=\dimen119
-) (./COSA_alg.aux
-
-LaTeX Warning: Label `alg:mine' multiply defined.
-
-)
+\@Leftmargin=\dimen119
+\@Rightmargin=\dimen120
+\@Topmargin=\dimen121
+\@Bottommargin=\dimen122
+) (./COSA_alg.aux)
 \openout1 = `COSA_alg.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
@@ -164,85 +172,39 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
- (/usr/share/texmf/tex/context/base/supp-pdf.mkii
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count101
-\scratchdimen=\dimen120
-\scratchbox=\box33
-\nofMPsegments=\count102
-\nofMParguments=\count103
+\scratchcounter=\count102
+\scratchdimen=\dimen123
+\scratchbox=\box35
+\nofMPsegments=\count103
+\nofMParguments=\count104
 \everyMPshowfont=\toks16
-\MPscratchCnt=\count104
-\MPscratchDim=\dimen121
-\MPnumerator=\count105
+\MPscratchCnt=\count105
+\MPscratchDim=\dimen124
+\MPnumerator=\count106
 \everyMPtoPDFconversion=\toks17
 )
-\c@lstlisting=\count106
+\c@lstlisting=\count107
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 22.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 22.
 
-Underfull \hbox (badness 10000) detected at line 73
-[][]
- []
+! Undefined control sequence.
+l.21 \SetLine
+             
+? 
+! Emergency stop.
+l.21 \SetLine
+             
+End of file on the terminal!
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--74
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 150
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--151
-
- []
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \vbox (14.99657pt too high) has occurred while \output is active []
-
-
-[2]
-
-Package caption Warning: Unused \captionsetup[lstlisting] on input line 11.
-See the caption package documentation for explanation.
-
-[3] (./COSA_alg.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+ 
 Here is how much of TeX's memory you used:
- 4368 strings out of 495061
- 61758 string characters out of 1182622
- 167667 words of memory out of 3000000
- 7569 multiletter control sequences out of 15000+50000
- 4653 words of font info for 17 fonts, out of 3000000 for 9000
+ 4489 strings out of 495061
+ 63923 string characters out of 1182621
+ 148033 words of memory out of 3000000
+ 7695 multiletter control sequences out of 15000+50000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 36i,25n,38p,231b,390s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mti10.pfb>
-Output written on COSA_alg.pdf (3 pages, 149671 bytes).
-PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 36i,5n,38p,231b,219s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
