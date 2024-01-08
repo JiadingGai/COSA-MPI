@@ -431,9 +431,9 @@ int main(int argc, char* argv[])
                 NN_T paul_NN;
                 MPI_Aint start_address;
                 MPI_Aint address1, address2;
-                MPI_Address( &(paul_NN), &start_address);
-                MPI_Address( &(paul_NN.objectID), &address1 );
-                MPI_Address( &(paul_NN.distance), &address2 );
+                MPI_Get_address( &(paul_NN), &start_address);
+                MPI_Get_address( &(paul_NN.objectID), &address1 );
+                MPI_Get_address( &(paul_NN.distance), &address2 );
                 printf("address of paul_NN = %d\n",start_address);
                 printf("address of paul_NN.objectID = %d\n", address1);
                 printf("address of paul_NN.distance = %d\n", address2);
@@ -764,16 +764,16 @@ void Build_derived_KNN_type(NN_T* nn_t_ptr, MPI_Datatype* mpi_knn_t_ptr)
     typelist[1] = MPI_FLOAT;
 
     /* First element, objectID, is a displacement 0 */
-    MPI_Address(nn_t_ptr,&start_address);
-    MPI_Address(&(nn_t_ptr->objectID), &address);
+    MPI_Get_address(nn_t_ptr,&start_address);
+    MPI_Get_address(&(nn_t_ptr->objectID), &address);
     displacements[0] = address - start_address;
 
     /* Find address of distance and displacement from objectID*/
-    MPI_Address(&(nn_t_ptr->distance), &address);
+    MPI_Get_address(&(nn_t_ptr->distance), &address);
     displacements[1] = address - start_address;
 
     /* Build A_NN_T_Object-the derived MPI KNN type */
-    MPI_Type_struct(2,block_lengths,displacements,typelist, mpi_knn_t_ptr);
+    MPI_Type_create_struct(2,block_lengths,displacements,typelist, mpi_knn_t_ptr);
 
     /* Commit it -- tell system we will be using it for communication */
     MPI_Type_commit(mpi_knn_t_ptr);
